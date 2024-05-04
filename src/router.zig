@@ -71,7 +71,7 @@ fn matchRoute(ctx: *Context, comptime method: std.http.Method, comptime pattern:
     if (ctx.req.method == method) {
         if (ctx.req.match(comptime pattern[0 .. pattern.len - @intFromBool(has_query)])) |params| {
             var args: std.meta.ArgsTuple(@TypeOf(handler)) = undefined;
-            const mid = args.len - n_params - @intFromBool(has_query) - @intFromBool(has_body);
+            const mid = args.len -| n_params -| @intFromBool(has_query) -| @intFromBool(has_body);
 
             inline for (0..mid) |i| {
                 args[i] = try ctx.injector.get(@TypeOf(args[i]));
