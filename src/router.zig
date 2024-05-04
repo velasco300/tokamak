@@ -86,7 +86,7 @@ fn matchRoute(ctx: *Context, comptime method: std.http.Method, comptime pattern:
             }
 
             if (comptime has_body) {
-                args[args.len -| 1] = try ctx.req.readJson(@TypeOf(args[args.len - 1]));
+                args[args.len -| 1] = try ctx.req.readJson(@TypeOf(args[args.len -| 1]));
             }
 
             try ctx.res.send(@call(.auto, handler, args));
